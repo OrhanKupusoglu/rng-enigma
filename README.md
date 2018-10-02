@@ -5,7 +5,7 @@ In the spring term of 1994 [Prof. Dr. Engin Arık](https://en.wikipedia.org/wiki
 &nbsp;
 
 <p align="center">
-<img  src= "./engin_arik.gif" alt="Prof. Dr. Engin Arık at her lab" >
+<img  src= "./image/engin_arik.gif" alt="Prof. Dr. Engin Arık at her lab" >
 <br>Prof. Dr. Engin Arık [1948-2007]
 </p>
 
