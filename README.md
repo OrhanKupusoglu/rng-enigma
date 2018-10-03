@@ -32,6 +32,10 @@ Assuming that each operator knows his counterpart's state at each step, they can
 
 The **seed** can explicitly be given as an hexadecimal string, like **"15594288E20BFBF1"**, or  by selecting **NULL** the current time in nanoseconds will be used as the seed. The seed can be set by the application's [CMakeListst.txt](.//application/CMakeLists.txt) build file.
 
+```
+add_definitions(-DRNG_SEED="15594288E20BFBF1")
+```
+
 Without the [XOR](https://en.wikipedia.org/wiki/Exclusive_or) operation Dieharder was consistently failing at some tests, like *rgb_bitdist-4* and *dab_monobit2*. Apparently the XOR operation improves bit distributions. Using current time as the seed, this code still fails sometimes at *dab_filltree2*, but most of the time no **FAILED** results are observed.
 
 The outputs are sensitive to the initial configuration of  the rotors. Besides each dimension uses a constant index for an ever-changing array of hexadecimal digits, which is determined at design-time. These  indices must be selected after many tests.
