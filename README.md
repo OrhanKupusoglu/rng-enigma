@@ -13,7 +13,7 @@ In the spring term of 1994 [Prof. Dr. Engin Arık](https://en.wikipedia.org/wiki
 
 ## Design
 
-The main inspiration for the current algorithm has been the [Enigma](https://en.wikipedia.org/wiki/Enigma_machine) **electro-mechanical rotor cipher machines**. Attempts to crack the Enigma machine code during World War II have been the subject of books and films, and therefore  **Enigma** is clearly the most well-known [cipher machine](http://www.cryptomuseum.com/crypto/enigma/index.htm) of its era.
+The main inspiration for the current algorithm has been the [Enigma](https://en.wikipedia.org/wiki/Enigma_machine) **electro-mechanical rotor cipher machines**. Attempts to crack the Enigma machine code during World War II have been the subject of books and films, and therefore  **Enigma** is clearly the most well-known [cipher machine](http://www.cryptomuseum.com/crypto/enigma/index.htm) of [its era](http://users.telenet.be/d.rijmenants/en/enigmamenu.htm).
 
 Let's start with a [Gedankenexperiment](https://www.britannica.com/science/Gedankenexperiment). What if two operators using modified Enigma machines start a *conversation*, which will be never decrypted at all? Can this conversation be **self-sustaining**?
 
