@@ -17,7 +17,7 @@ The main inspiration for the current algorithm has been the [Enigma](https://en.
 
 Let's start with a [Gedankenexperiment](https://www.britannica.com/science/Gedankenexperiment). What if two operators using modified Enigma machines start a *conversation*, which will be never decrypted at all? Can this conversation be **self-sustaining**?
 
-The modified Enigma machines have 16 rotors, instead of three or four, and rotors contain hexadecimal digits instead of the 26 letters of the alphabet. Therefore each keystroke generates a hexadecimal digit. Since decryption is not a requirement, at each keystroke rotors are changed freely. 
+The modified Enigma machines have 16 rotors, instead of three or four, and rotors contain hexadecimal digits instead of the 26 letters of the alphabet. Therefore each keystroke generates a hexadecimal digit. Since decryption is not a requirement, at each keystroke rotors are changed freely.
 
 Rotors are modeled as a two dimensional array, read from [enigma-rotors.cfg](./application/bin/enigma-rotors.cfg). The first dimension corresponds to the order of the rotors, and the second dimension corresponds to the typed input. With this setup of **rotor & input**, coding simplifies considerably. For historical reasons, these indices are called **Ringstellungen**.
 
@@ -333,7 +333,7 @@ CEE03BD214A8A9AE    0.808109034337265886
 
 #### Option #3
 
-This option generates a binary file, **dieharder.bin**, which is then fed into the **Dieharder** test suit. Each write operation saves ten 32-bit numbers, which are in fact five 64 bit numbers.
+This option generates a binary file, **dieharder.bin**, which is then fed into the **Dieharder** test suit. Each write operation saves ten 32-bit numbers, which are in fact five 64-bit numbers.
 
 ```
 $ ./rng-enigma-app 3 1000000000
