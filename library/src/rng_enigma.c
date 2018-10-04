@@ -155,8 +155,8 @@ char* int2bin(uint64_t u) {
 // generate numbers
 uint64_t rng_get_uint64() {
     uint64_t pre;
-    uint64_t num;
     uint64_t aux;
+    uint64_t num;
 
     pre = (rotors[rs_a[15]][rs_b[0]]    << 60)
            | (rotors[rs_a[14]][rs_b[1]] << 56)
