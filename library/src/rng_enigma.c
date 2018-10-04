@@ -154,10 +154,11 @@ char* int2bin(uint64_t u) {
 
 // generate numbers
 uint64_t rng_get_uint64() {
+    uint64_t pre;
     uint64_t num;
     uint64_t aux;
 
-    num = (rotors[rs_a[15]][rs_b[0]]    << 60)
+    pre = (rotors[rs_a[15]][rs_b[0]]    << 60)
            | (rotors[rs_a[14]][rs_b[1]] << 56)
            | (rotors[rs_a[13]][rs_b[2]] << 52)
            | (rotors[rs_a[12]][rs_b[3]] << 48)
@@ -191,15 +192,16 @@ uint64_t rng_get_uint64() {
            | (rotors[rs_b[0]][rs_a[0]]  <<  4)
            | (rotors[rs_b[15]][rs_a[1]]);
 
-    num = num ^ aux;
+    num = pre ^ aux;
 
     rng_stellung_forward(num, rs_a);
     rng_stellung_reverse(aux, rs_b);
 
     if (debug) {
-        printf("\nRNG ENIGMA - random num = %020lu => %016lX\n%s\n                aux num = %020lu => %016lX\n%s\n",
-               num, num, int2bin(num),
-               aux, aux, int2bin(aux));
+        printf("\nRNG ENIGMA - pre = %020lu : %016lX : %s\n             aux = %020lu : %016lX : %s\n             rnd = %020lu : %016lX : %s\n",
+               pre, pre, int2bin(pre),
+               aux, aux, int2bin(aux),
+               num, num, int2bin(num));
         rng_display_ringstellungen();
     }
 
