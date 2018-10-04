@@ -75,9 +75,8 @@ void rng_display_ringstellungen() {
     for (int i = 0; i < 16; i++) {
         printf("%01X ", rs_a[i]);
     }
-    printf("\n");
 
-    printf("RNG ENIGMA - Ringstellung B: ");
+    printf("\n             Ringstellung B: ");
     for (int i = 0; i < 16; i++) {
         printf("%01X ", rs_b[i]);
     }
