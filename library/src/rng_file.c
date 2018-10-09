@@ -152,6 +152,10 @@ double rng_output_doubles_txt(const char* file_name, const long nums, bool save)
                     rng_write_file_txt(fl, buffer, 380);
                 }
             }
+
+            if (save) {
+                rng_close_file(fl);
+            }
         }
     } else {
         fprintf(stderr, "** RNG ENIGMA - ERROR - not initialized\n");
