@@ -249,7 +249,7 @@ $ man dieharder
 All tests are run on a notebook with the given specification:
 
 ```
-$ cat /etc/lsb-release 
+$ cat /etc/lsb-release
 DISTRIB_ID=LinuxMint
 DISTRIB_RELEASE=19
 DISTRIB_CODENAME=tara
@@ -333,6 +333,11 @@ B69BBE6149408BA7    0.713313959838389522
 9808F7AC84D76BB2    0.593886832827448696
 C97FACF9EC54CCD0    0.787104426399610979
 CEE03BD214A8A9AE    0.808109034337265886
+
+$ du -b enigma.txt
+38000000000 enigma.txt
+$ du -h enigma.txt
+36G enigma.txt
 ```
 
 &nbsp;
@@ -363,9 +368,9 @@ $ hexdump -n 160 dieharder.bin
 00000a0
 
 $ du -b dieharder.bin
-4000000000  dieharder.bin
+4000000000 dieharder.bin
 $ du -h dieharder.bin
-3,8G    dieharder.bin
+3,8G dieharder.bin
 
 $ time dieharder -a -g 201 -f dieharder.bin
 #=============================================================================#
