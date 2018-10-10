@@ -19,7 +19,7 @@
                                 "\t2 - generate doubles between [0.0 - 1.0] and save the data: \"" RNG_FILE_DBL "\"\n" \
                                 "\t3 - generate binary file for Dieharder: \"" RNG_FILE_BIN "\"\n" \
                                 "\t4 - generate text file for Dieharder: \"" RNG_FILE_TXT "\"\n" \
-                                "arg#2 - enter the number of pseudo random numbers\n"
+                                "arg#2 - enter the number of pseudorandom numbers\n"
 
 int main(int argc, char** argv) {
     int       rnd_sel = 0;

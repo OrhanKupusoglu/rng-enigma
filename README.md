@@ -107,7 +107,7 @@ arg#1 - enter the op selection
     2 - generate doubles between [0.0 - 1.0] and save the data: "enigma.txt"
     3 - generate binary file for Dieharder: "dieharder.bin"
     4 - generate text file for Dieharder: "dieharder.txt"
-arg#2 - enter the number of pseudo random numbers
+arg#2 - enter the number of pseudorandom numbers
 
 $ ./rng-enigma-app 1 10
 
