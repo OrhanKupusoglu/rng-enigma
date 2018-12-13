@@ -8,6 +8,9 @@ set(BUILD_PATCH_VER 1)
 
 add_definitions(-DRNG_ENIGMA_LIB_VERSION="${BUILD_MAJOR_VER}.${BUILD_MINOR_VER}.${BUILD_PATCH_VER}")
 
+get_directory_property( DirDefs COMPILE_DEFINITIONS )
+message( "-- Compile_definitions: ${DirDefs}" )
+
 set(SOURCE_FILES "src/rng_enigma.c"
                  "src/rng_file.c")
 
