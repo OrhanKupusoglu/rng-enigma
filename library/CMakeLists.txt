@@ -2,11 +2,12 @@ cmake_minimum_required(VERSION 3.5)
 
 set(BUILD_NAME rng-enigma)
 
-set(BUILD_MAJOR_VER 0)
-set(BUILD_MINOR_VER 2)
-set(BUILD_PATCH_VER 1)
+#set(BUILD_MAJOR_VER 0)
+#set(BUILD_MINOR_VER 3)
+#set(BUILD_PATCH_VER 1)
 
-add_definitions(-DRNG_ENIGMA_LIB_VERSION="${BUILD_MAJOR_VER}.${BUILD_MINOR_VER}.${BUILD_PATCH_VER}")
+#add_definitions(-DRNG_ENIGMA_LIB_VERSION="${BUILD_MAJOR_VER}.${BUILD_MINOR_VER}.${BUILD_PATCH_VER}")
+include("CMakeVersion.txt")
 
 get_directory_property( DirDefs COMPILE_DEFINITIONS )
 message( "-- Compile_definitions: ${DirDefs}" )
