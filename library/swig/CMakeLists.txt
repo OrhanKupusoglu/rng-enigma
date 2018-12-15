@@ -11,13 +11,9 @@ cmake_minimum_required(VERSION 3.5)
 
 include("../CMakeVersion.txt")
 
-cmake_policy(SET CMP0078 NEW)
-
-set(BUILD_MAJOR_VER 0)
-set(BUILD_MINOR_VER 3)
-set(BUILD_PATCH_VER 1)
-
-add_definitions(-DRNG_ENIGMA_LIB_VERSION="${BUILD_MAJOR_VER}.${BUILD_MINOR_VER}.${BUILD_PATCH_VER}")
+if(POLICY CMP0078)
+    cmake_policy(SET CMP0078 LEGACY)
+endif()
 
 find_package(SWIG REQUIRED)
 include(${SWIG_USE_FILE})
@@ -47,7 +43,7 @@ swig_add_library(rng_enigma TYPE SHARED
 
 swig_link_libraries(rng_enigma ${PYTHON_LIBRARIES})
 
-add_custom_command(TARGET rng_enigma
+add_custom_command(TARGET ${SWIG_MODULE_rng_enigma_REAL_NAME}
                    POST_BUILD
-                   COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:rng_enigma> "../../lib"
+                   COMMAND ${CMAKE_COMMAND} -E copy _rng_enigma.so "../../lib"
                    COMMAND ${CMAKE_COMMAND} -E copy rng_enigma.py "../../lib")
