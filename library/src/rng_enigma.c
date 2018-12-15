@@ -15,7 +15,7 @@ static uint64_t                 seed;
 static bool                     debug = false;
 
 // version is set by CMake
-char* get_enigma_version() {
+char* rng_get_version() {
     return RNG_ENIGMA_LIB_VERSION;
 }
 

@@ -7,7 +7,7 @@
 #define RNG_BILLION_L           1000000000L
 #define RNG_BILLION_D           1000000000.0
 
-char* get_enigma_version();
+char* rng_get_version();
 
 void rng_set_debug(bool curr_debug);
 
