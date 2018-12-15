@@ -26,14 +26,8 @@ include_directories("../include")
 set(SOURCE_FILES "../src/rng_enigma.c"
                  "../src/rng_file.c")
 
-
-#set(CMAKE_SWIG_OUTDIR "../../lib")
 set(CMAKE_SWIG_FLAGS "")
 
-#set_property(SOURCE ./swig/lib_rng_enigma.i PROPERTY SWIG_MODULE_NAME rng_enigma.so)
-#set_property(SOURCE ./swig/lib_rng_enigma.i PROPERTY SWIG_OUTFILE_DIR "./lib")
-
-#set_source_files_properties("lib_rng_enigma.i" PROPERTIES C ON)
 set_source_files_properties("lib_rng_enigma.i" PROPERTIES SWIG_FLAGS "-threads" SWIG_FLAGS "-py3")
 
 swig_add_library(rng_enigma TYPE SHARED
