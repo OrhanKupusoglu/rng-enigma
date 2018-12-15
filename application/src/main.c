@@ -52,7 +52,7 @@ int main(int argc, char** argv) {
                 printf("RNG ENIGMA - seed: %016lX\n", rng_get_seed());
                 printf("RNG ENIGMA - generate %'ld numbers\n", (rnd_count * 10));
 
-                clock_gettime(CLOCK_REALTIME, &t_start);
+                clock_gettime(CLOCK_MONOTONIC, &t_start);
 
                 switch (rnd_sel) {
                     case 1:
@@ -77,7 +77,7 @@ int main(int argc, char** argv) {
                         printf("** RNG ENIGMA - %s\n", RNG_INVALID);
                 }
 
-                clock_gettime(CLOCK_REALTIME, &t_end);
+                clock_gettime(CLOCK_MONOTONIC, &t_end);
 
                 t_duration = (t_end.tv_sec - t_start.tv_sec) +
                              (t_end.tv_nsec - t_start.tv_nsec) / RNG_BILLION_D;
@@ -91,7 +91,7 @@ int main(int argc, char** argv) {
             printf("** RNG ENIGMA - %s\n", RNG_INVALID);
         }
     } else {
-        printf(RNG_HELP, get_enigma_version());
+        printf(RNG_HELP, rng_get_version());
     }
 
     return EXIT_SUCCESS;
