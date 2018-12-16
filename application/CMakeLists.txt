@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.5)
 set(BUILD_NAME rng-enigma-app)
 
 set(BUILD_MAJOR_VER 0)
-set(BUILD_MINOR_VER 2)
+set(BUILD_MINOR_VER 3)
 set(BUILD_PATCH_VER 1)
 
 add_definitions(-DRNG_DEBUG=false)
