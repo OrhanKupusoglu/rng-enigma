@@ -6,6 +6,7 @@
 
 #include "lib_rng_enigma.h"
 
+
 // Rotors
 static uint64_t                 rotors[16][16];
 // Ringstellungen
@@ -14,12 +15,11 @@ static char                     rs_b[16];
 static uint64_t                 seed;
 static bool                     debug = false;
 
-// version is set by CMake
+
 char* rng_get_version() {
     return RNG_ENIGMA_LIB_VERSION;
 }
 
-// initialization
 void rng_set_debug(bool curr_debug) {
     debug = curr_debug;
 }
@@ -28,8 +28,32 @@ bool rng_is_debug() {
     return debug;
 }
 
-bool rng_init_rotors() {
-    return rng_read_random(rotors);
+bool rng_init_rotors(const char* file_path) {
+    return rng_read_random(file_path, (uint64_t*)rotors);
+}
+
+char* rng_get_rotors() {
+    size_t size = 16 * 32;
+    int c2 = 0;
+    char* p_buff = malloc(size);
+
+    if (p_buff) {
+        memset(p_buff, 0, size);
+
+        if (rng_enigma_is_initialized()) {
+            for (int i = 0; i < 16; i++) {
+                for (int j = 0; j < 16; j++) {
+                    sprintf(p_buff + c2, "%01lX ", rotors[i][j]);
+                    c2 += 2;
+                }
+                c2--;
+                sprintf(p_buff + c2, "\n");
+                c2++;
+            }
+        }
+    }
+
+    return p_buff;
 }
 
 void rng_stellung_reverse(uint64_t x, char bytes[16]) {
@@ -83,7 +107,7 @@ void rng_display_ringstellungen() {
     printf("\n");
 }
 
-void rng_init_ringstellungen(char* current_seed) {
+void rng_init_ringstellungen(const char* current_seed) {
     if (current_seed) {
         seed = strtoull(current_seed, NULL, 16);
     } else {
@@ -108,10 +132,10 @@ void rng_init_ringstellungen(char* current_seed) {
     }
 }
 
-bool rng_enigma_init(char* curr_seed) {
+bool rng_enigma_init(const char* file_name, const char* curr_seed) {
     bool status = false;
 
-    if (rng_init_rotors()) {
+    if (rng_init_rotors(file_name)) {
         rng_init_ringstellungen(curr_seed);
         status = true;
 
@@ -197,10 +221,19 @@ uint64_t rng_get_uint64() {
     rng_stellung_reverse(aux, rs_b);
 
     if (debug) {
+        char* bin_pre = int2bin(pre);
+        char* bin_aux = int2bin(aux);
+        char* bin_num = int2bin(num);
+
         printf("\nRNG ENIGMA - pre = %020lu : %016lX : %s\n             aux = %020lu : %016lX : %s\n             rnd = %020lu : %016lX : %s\n",
-               pre, pre, int2bin(pre),
-               aux, aux, int2bin(aux),
-               num, num, int2bin(num));
+               pre, pre, bin_pre,
+               aux, aux, bin_aux,
+               num, num, bin_num);
+
+        free(bin_pre);
+        free(bin_aux);
+        free(bin_num);
+
         rng_display_ringstellungen();
     }
 
