@@ -39,7 +39,6 @@ bool rng_read_file(const char* file_path, char** buffer, int* file_size) {
     return status;
 }
 
-//bool rng_read_random(const char* file_path, uint64_t rotors[16][16]) {
 bool rng_read_random(const char* file_path, uint64_t* p_rotors) {
     bool        status = false;
     bool        read   = true;
