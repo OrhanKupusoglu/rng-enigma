@@ -803,7 +803,7 @@ sys 2m1,395s
 
 ## SWIG and Python
 
-Using [SWIG](https://en.wikipedia.org/wiki/SWIG) the library can be used with Python.
+Using [SWIG](https://en.wikipedia.org/wiki/SWIG) the library can be imported to Python.
 
 > The Simplified Wrapper and Interface Generator (SWIG) is an open-source software tool used to connect computer programs or libraries written in C or C++ with scripting languages.
 
@@ -811,6 +811,16 @@ SWIG and the required Python 3 Dev library can easily be installed via apt:
 ```
 $ sudo apt install swig
 $ sudo apt install python3-dev
+
+$ swig -version
+
+SWIG Version 3.0.12
+
+Compiled with g++ [x86_64-pc-linux-gnu]
+
+Configured options: +pcre
+
+Please see http://www.swig.org for reporting bugs and further information
 ```
 The library has a new folder [swig](./library/swig), which contains its own CMake configuration file and a [SWIG interface file](http://www.swig.org/Doc1.3/SWIG.html#SWIG_nn47). For convenience a **build script** is also provided
 
@@ -870,7 +880,6 @@ A 4 8 E 3 D 2 F 1 6 7 5 9 C 0 B
 9 E D A 4 3 B C 6 5 7 8 0 1 F 2
 1 D 8 E 5 C 6 B 7 A 2 F 0 9 3 4
 8 1 0 2 C B 9 4 A 6 7 5 D F E 3
-
 >>> seed = rng_enigma.rng_get_seed()
 >>> print(seed)
 1544996089255362566
