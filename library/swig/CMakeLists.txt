@@ -4,11 +4,6 @@ cmake_minimum_required(VERSION 3.5)
 # SWIG BINDINGS FOR PYTHON
 # ------------------------------------------------------------------------------
 
-# $ sudo apt install swig
-# $ sudo apt install python-dev
-# $ sudo apt install python3-dev
-# $ LD_LIBRARY_PATH=. python3
-
 include("../CMakeVersion.txt")
 
 if(POLICY CMP0078)
@@ -41,3 +36,4 @@ add_custom_command(TARGET ${SWIG_MODULE_rng_enigma_REAL_NAME}
                    POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy _rng_enigma.so "../../lib"
                    COMMAND ${CMAKE_COMMAND} -E copy rng_enigma.py "../../lib")
+
