@@ -3,13 +3,12 @@
 
 #include "lib_rng_enigma.h"
 
-#define RNG_FILE_RINGS          "enigma-rotors.cfg"
 
-bool rng_read_file(const char* file_name, char** buffer, long* file_size) {
+bool rng_read_file(const char* file_path, char** buffer, int* file_size) {
     bool    status = false;
     FILE*   fl;
 
-    fl = fopen(file_name, "rb");
+    fl = fopen(file_path, "rb");
 
     if (fl && file_size) {
         // get file size
@@ -26,61 +25,59 @@ bool rng_read_file(const char* file_name, char** buffer, long* file_size) {
 
         if (*buffer) {
             memset(*buffer, 0, *file_size);
-            fread(*buffer, 1, (*file_size - 1), fl);
-            status = true;
+            size_t read_size = fread(*buffer, 1, (*file_size - 1), fl);
+            status = (read_size == *file_size);
         } else {
             fprintf(stderr, "** RNG ENIGMA - ERROR - malloc failure\n");
         }
 
         fclose(fl);
     } else {
-        fprintf(stderr, "** RNG ENIGMA - ERROR - unable to open the file '%s'\n", file_name);
+        fprintf(stderr, "** RNG ENIGMA - ERROR - unable to open the file '%s'\n", file_path);
     }
 
     return status;
 }
 
-// read config
-bool rng_read_random(uint64_t rotors[16][16]) {
-    bool    status = false;
-    long    size   = 16 * 32;
-    char    buffer[size];
-    char*   p_buff = buffer;
-    bool    debug = rng_is_debug();
+//bool rng_read_random(const char* file_path, uint64_t rotors[16][16]) {
+bool rng_read_random(const char* file_path, uint64_t* p_rotors) {
+    bool        status = false;
+    bool        read   = true;
+    int         size   = 16 * 32;
+    char        buffer[size];
+    char*       p_buff = buffer;
+    bool        debug = rng_is_debug();
 
-    if (rng_read_file(RNG_FILE_RINGS, &p_buff, &size)) {
-        for (int i = 0; i < 16; i++) {
-            sscanf(p_buff + (i * 32), "%lX %lX %lX %lX %lX %lX %lX %lX %lX %lX %lX %lX %lX %lX %lX %lX\n",
-                                      &rotors[i][0],  &rotors[i][1],  &rotors[i][2],  &rotors[i][3],
-                                      &rotors[i][4],  &rotors[i][5],  &rotors[i][6],  &rotors[i][7],
-                                      &rotors[i][8],  &rotors[i][9],  &rotors[i][10], &rotors[i][11],
-                                      &rotors[i][12], &rotors[i][13], &rotors[i][14], &rotors[i][15]);
+    if (p_rotors) {
+        if (file_path == NULL) {
+            p_buff = RNG_ROTORS_DEFAULT;
+        } else {
+            read = rng_read_file(file_path, &p_buff, &size);
         }
 
-        if (debug) {
-            printf("\nRNG ENIGMA - Rotors:\n");
+        if (read) {
             for (int i = 0; i < 16; i++) {
-                for (int j = 0; j < 16; j++) {
-                    printf("%01lX ", rotors[i][j]);
-                }
-                printf("\n");
+                sscanf(p_buff + (i * 32), "%lX %lX %lX %lX %lX %lX %lX %lX %lX %lX %lX %lX %lX %lX %lX %lX\n",
+                                          p_rotors + (i * 16) + 0,   p_rotors + (i * 16) + 1,   p_rotors + (i * 16) + 2,   p_rotors + (i * 16) + 3,
+                                          p_rotors + (i * 16) + 4,   p_rotors + (i * 16) + 5,   p_rotors + (i * 16) + 6,   p_rotors + (i * 16) + 7,
+                                          p_rotors + (i * 16) + 8,   p_rotors + (i * 16) + 9,   p_rotors + (i * 16) + 10,  p_rotors + (i * 16) + 11,
+                                          p_rotors + (i * 16) + 12,  p_rotors + (i * 16) + 13,  p_rotors + (i * 16) + 14,  p_rotors + (i * 16) + 15);
             }
-            printf("\n");
-        }
 
-        status = true;
-    } else {
-        fprintf(stderr, "** RNG ENIGMA - ERROR - unable to read file '%s'\n", RNG_FILE_RINGS);
+            status = true;
+        } else {
+            fprintf(stderr, "** RNG ENIGMA - ERROR - unable to read file '%s'\n", file_path);
+        }
     }
 
     return status;
 }
 
-FILE* rng_save_bin_file(const char* file_name) {
+FILE* rng_save_bin_file(const char* file_path) {
     bool        status = false;
     FILE*       fl;
 
-    fl = fopen(file_name, "wb");
+    fl = fopen(file_path, "wb");
 
     return fl;
 }
@@ -101,7 +98,7 @@ void rng_close_file(FILE* fl) {
     fclose(fl);
 }
 
-double rng_output_doubles_txt(const char* file_name, const long nums, bool save) {
+double rng_output_doubles_txt(const char* file_path, const long nums, bool save) {
     bool    debug = rng_is_debug();
     double  total = 0.0;
 
@@ -110,11 +107,11 @@ double rng_output_doubles_txt(const char* file_name, const long nums, bool save)
         bool go = false;
 
         if (save) {
-            fl = rng_save_bin_file(file_name);
+            fl = rng_save_bin_file(file_path);
             if (fl) {
                 go = true;
             } else {
-                fprintf(stderr, "** RNG ENIGMA - ERROR - unable to save the file '%s'\n", file_name);
+                fprintf(stderr, "** RNG ENIGMA - ERROR - unable to save the file '%s'\n", file_path);
             }
         } else {
             go = true;
@@ -164,11 +161,11 @@ double rng_output_doubles_txt(const char* file_name, const long nums, bool save)
     return (total / ((double)nums * 10));
 }
 
-void rng_output_dieharder_bin(const char* file_name, const long nums) {
+void rng_output_dieharder_bin(const char* file_path, const long nums) {
     bool debug = rng_is_debug();
 
     if (rng_enigma_is_initialized()) {
-        FILE* fl = rng_save_bin_file(file_name);
+        FILE* fl = rng_save_bin_file(file_path);
         if (fl) {
             int j = 0;
             uint64_t rnd[5];
@@ -188,18 +185,18 @@ void rng_output_dieharder_bin(const char* file_name, const long nums) {
 
             rng_close_file(fl);
         } else {
-            fprintf(stderr, "** RNG ENIGMA - ERROR - unable to save the file '%s'\n", file_name);
+            fprintf(stderr, "** RNG ENIGMA - ERROR - unable to save the file '%s'\n", file_path);
         }
     } else {
         fprintf(stderr, "** RNG ENIGMA - ERROR - not initialized\n");
     }
 }
 
-void rng_output_dieharder_txt(const char* file_name, const long nums) {
+void rng_output_dieharder_txt(const char* file_path, const long nums) {
     bool debug = rng_is_debug();
 
     if (rng_enigma_is_initialized()) {
-        FILE* fl = rng_save_bin_file(file_name);
+        FILE* fl = rng_save_bin_file(file_path);
         if (fl) {
             char buffer[128];
             memset(buffer, '\0', 128);
@@ -237,7 +234,7 @@ void rng_output_dieharder_txt(const char* file_name, const long nums) {
 
             rng_close_file(fl);
         } else {
-            fprintf(stderr, "** RNG ERROR - unable to save the file '%s'\n", file_name);
+            fprintf(stderr, "** RNG ERROR - unable to save the file '%s'\n", file_path);
         }
     } else {
         fprintf(stderr, "** RNG ENIGMA - ERROR - not initialized\n");
