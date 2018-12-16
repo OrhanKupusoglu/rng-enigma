@@ -68,7 +68,7 @@ action() {
     echo "++ ${ACTION_ING} the ${DIR} project ..."
 
     case "$CMD" in
-        "cmake")      cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 ../. ;;
+        "cmake")      cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXPORT_COMPILE_COMMANDS=1 ../. ;;
         "make")       make ; eval $INST ;;
         "clean")      make clean ;;
         "purge")      find . ! -name '.gitignore' -delete ; eval $PURGE ;;
