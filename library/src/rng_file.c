@@ -25,7 +25,7 @@ bool rng_read_file(const char* file_path, char** buffer, int* file_size) {
 
         if (*buffer) {
             memset(*buffer, 0, *file_size);
-            size_t read_size = fread(*buffer, 1, (*file_size - 1), fl);
+            size_t read_size = fread(*buffer, 1, *file_size, fl);
             status = (read_size == *file_size);
         } else {
             fprintf(stderr, "** RNG ENIGMA - ERROR - malloc failure\n");
