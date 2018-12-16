@@ -39,10 +39,22 @@ int main(int argc, char** argv) {
 
                 rng_set_debug(RNG_DEBUG);
 
-                // if seed is NULL
-                // then current time in nanoseconds will be the seed
-                // else the string (f.e. "15594288E20BFBF1") is presumed to be a base 16 number
-                rng_enigma_init(RNG_SEED);
+                // if the file path is NULL then embedded config data will be used
+                //   else the file's content will be read in
+                // if seed is NULL then current time in nanoseconds will be used
+                //   else the seed (f.e. "15594288E20BFBF1") is presumed to be a base 16 number
+
+                //rng_enigma_init("enigma-rotors.cfg", RNG_SEED);
+                rng_enigma_init(NULL, RNG_SEED);
+
+                if (rng_is_debug()) {
+                    char* p_buff = rng_get_rotors();
+
+                    printf("\nRNG ENIGMA - Rotors:\n");
+                    printf("%s\n", p_buff);
+
+                    free(p_buff);
+                }
 
                 if (rnd_count < 10) {
                     rnd_count = 10;
