@@ -50,6 +50,7 @@ char* rng_get_rotors() {
                 sprintf(p_buff + c2, "\n");
                 c2++;
             }
+            p_buff[--c2] = '\0';
         }
     }
 
