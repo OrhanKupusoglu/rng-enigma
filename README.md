@@ -19,7 +19,7 @@ Let's start with a [Gedankenexperiment](https://www.britannica.com/science/Gedan
 
 The modified Enigma machines have 16 rotors, instead of three or four, and rotors contain hexadecimal digits instead of the 26 letters of the alphabet. Therefore each keystroke generates a hexadecimal digit. Since decryption is not a requirement, at each keystroke rotors are changed freely.
 
-Rotors are modeled as a two dimensional array, read from [enigma-rotors.cfg](./application/bin/enigma-rotors.cfg). The first dimension corresponds to the order of the rotors, and the second dimension corresponds to the typed input. With this setup of **rotor & input**, coding simplifies considerably. For historical reasons, these indices are called **Ringstellungen**.
+Rotors are modeled as a two dimensional array, read from a given file, for an example see [enigma-rotors.cfg](./application/bin/enigma-rotors.cfg), or the embedded [default configuration](./library/include/rng_enigma.h) is used. The first dimension corresponds to the order of the rotors, and the second dimension corresponds to the typed input. With this setup of **rotor & input**, coding simplifies considerably. For historical reasons, these indices are called **Ringstellungen**.
 
 Assuming that each operator knows his counterpart's state at each step, they can think of an algorithm:
 
@@ -91,7 +91,7 @@ The library is packaged with an application which helps with testing it.
 The library can be set into the **debug** mode by the application's [CMakeListst.txt](.//application/CMakeLists.txt) build file.
 
 ```
-add_definitions(-DRNG_DEBUG="true")
+add_definitions(-DRNG_DEBUG=true)
 ```
 
 After re-building the app, debug output can be investigated.
@@ -99,17 +99,11 @@ After re-building the app, debug output can be investigated.
 ```
 $ cd application/bin/
 
-$ ./rng-enigma-app
-RNG ENIGMA - v0.2.1
-Usage:
-arg#1 - enter the op selection
-    1 - generate doubles between [0.0 - 1.0] and calculate the avg
-    2 - generate doubles between [0.0 - 1.0] and save the data: "enigma.txt"
-    3 - generate binary file for Dieharder: "dieharder.bin"
-    4 - generate text file for Dieharder: "dieharder.txt"
-arg#2 - enter the number of pseudorandom numbers
-
 $ ./rng-enigma-app 1 10
+RNG ENIGMA - seed: 01538439301595363203 => hex: 1559A264D0177783 => bswap: 837717D064A25915
+RNG ENIGMA - Ringstellung A: 3 8 7 7 7 1 0 D 4 6 2 A 9 5 5 1 
+             Ringstellung B: 1 5 5 9 A 2 6 4 D 0 1 7 7 7 8 3 
+RNG ENIGMA - initialization success
 
 RNG ENIGMA - Rotors:
 1 9 4 8 C F 2 E 6 D A 3 B 0 5 7
@@ -129,10 +123,6 @@ C A 0 1 9 E D 4 5 B 2 F 8 6 3 7
 4 3 9 0 F 2 A 7 B 6 C 5 E 8 D 1
 3 E F D 5 7 6 A 4 9 B C 2 0 1 8
 
-RNG ENIGMA - seed: 01538439301595363203 => hex: 1559A264D0177783 => bswap: 837717D064A25915
-RNG ENIGMA - Ringstellung A: 3 8 7 7 7 1 0 D 4 6 2 A 9 5 5 1
-             Ringstellung B: 1 5 5 9 A 2 6 4 D 0 1 7 7 7 8 3
-RNG ENIGMA - initialization success
 RNG ENIGMA - seed: 1559A264D0177783
 RNG ENIGMA - generate 10 numbers
 RNG ENIGMA - generating doubles between [0.0 - 1.0]
@@ -140,78 +130,79 @@ RNG ENIGMA - generating doubles between [0.0 - 1.0]
 RNG ENIGMA - pre = 14450203126273217015 : C8896F2ED1C111F7 : 1100100010001001011011110010111011010001110000010001000111110111
              aux = 01233846115883978738 : 111F808154C28FF2 : 0001000100011111100000001000000101010100110000101000111111110010
              rnd = 15678982689866882565 : D996EFAF85039E05 : 1101100110010110111011111010111110000101000000111001111000000101
-RNG ENIGMA - Ringstellung A: D 9 9 6 E F A F 8 5 0 3 9 E 0 5
-             Ringstellung B: 2 F F 8 2 C 4 5 1 8 0 8 F 1 1 1
+RNG ENIGMA - Ringstellung A: D 9 9 6 E F A F 8 5 0 3 9 E 0 5 
+             Ringstellung B: 2 F F 8 2 C 4 5 1 8 0 8 F 1 1 1 
 
 RNG ENIGMA - pre = 13193870255543000815 : B71A0B17E23B9EEF : 1011011100011010000010110001011111100010001110111001111011101111
              aux = 05627997775303292884 : 4E1AAA2881A437D4 : 0100111000011010101010100010100010000001101001000011011111010100
              rnd = 17942518209070475579 : F900A13F639FA93B : 1111100100000000101000010011111101100011100111111010100100111011
-RNG ENIGMA - Ringstellung A: F 9 0 0 A 1 3 F 6 3 9 F A 9 3 B
-             Ringstellung B: 4 D 7 3 4 A 1 8 8 2 A A A 1 E 4
+RNG ENIGMA - Ringstellung A: F 9 0 0 A 1 3 F 6 3 9 F A 9 3 B 
+             Ringstellung B: 4 D 7 3 4 A 1 8 8 2 A A A 1 E 4 
 
 RNG ENIGMA - pre = 12447759859992406389 : ACBF53A44036A975 : 1010110010111111010100111010010001000000001101101010100101110101
              aux = 05215726273006130271 : 4861FB694433D45F : 0100100001100001111110110110100101000100001100111101010001011111
              rnd = 16491804483966565674 : E4DEA8CD04057D2A : 1110010011011110101010001100110100000100000001010111110100101010
-RNG ENIGMA - Ringstellung A: E 4 D E A 8 C D 0 4 0 5 7 D 2 A
-             Ringstellung B: F 5 4 D 3 3 4 4 9 6 B F 1 6 8 4
+RNG ENIGMA - Ringstellung A: E 4 D E A 8 C D 0 4 0 5 7 D 2 A 
+             Ringstellung B: F 5 4 D 3 3 4 4 9 6 B F 1 6 8 4 
 
 RNG ENIGMA - pre = 05657832766624249263 : 4E84A8ECBD3435AF : 0100111010000100101010001110110010111101001101000011010110101111
              aux = 10247021754069140766 : 8E34BBFE88FDC51E : 1000111000110100101110111111111010001000111111011100010100011110
              rnd = 13884618620116005041 : C0B0131235C9F0B1 : 1100000010110000000100110001001000110101110010011111000010110001
-RNG ENIGMA - Ringstellung A: C 0 B 0 1 3 1 2 3 5 C 9 F 0 B 1
-             Ringstellung B: E 1 5 C D F 8 8 E F B B 4 3 E 8
+RNG ENIGMA - Ringstellung A: C 0 B 0 1 3 1 2 3 5 C 9 F 0 B 1 
+             Ringstellung B: E 1 5 C D F 8 8 E F B B 4 3 E 8 
 
 RNG ENIGMA - pre = 08282796407389012053 : 72F26772C94DC055 : 0111001011110010011001110111001011001001010011011100000001010101
              aux = 05836716828102773995 : 51002F07E99C4CEB : 0101000100000000001011110000011111101001100111000100110011101011
              rnd = 02590212403590433982 : 23F2487520D18CBE : 0010001111110010010010000111010100100000110100011000110010111110
-RNG ENIGMA - Ringstellung A: 2 3 F 2 4 8 7 5 2 0 D 1 8 C B E
-             Ringstellung B: B E C 4 C 9 9 E 7 0 F 2 0 0 1 5
+RNG ENIGMA - Ringstellung A: 2 3 F 2 4 8 7 5 2 0 D 1 8 C B E 
+             Ringstellung B: B E C 4 C 9 9 E 7 0 F 2 0 0 1 5 
 
 RNG ENIGMA - pre = 06090375075308802990 : 54855BDCE0AC93AE : 0101010010000101010110111101110011100000101011001001001110101110
              aux = 10720730558739447290 : 94C7AFA46E56FDFA : 1001010011000111101011111010010001101110010101101111110111111010
              rnd = 13853904202377096788 : C042F4788EFA6E54 : 1100000001000010111101000111100010001110111110100110111001010100
-RNG ENIGMA - Ringstellung A: C 0 4 2 F 4 7 8 8 E F A 6 E 5 4
-             Ringstellung B: A F D F 6 5 E 6 4 A F A 7 C 4 9
+RNG ENIGMA - Ringstellung A: C 0 4 2 F 4 7 8 8 E F A 6 E 5 4 
+             Ringstellung B: A F D F 6 5 E 6 4 A F A 7 C 4 9 
 
 RNG ENIGMA - pre = 04362149476473460427 : 3C8977D6525B56CB : 0011110010001001011101111101011001010010010110110101011011001011
              aux = 16156842531754177887 : E038A2AE1521755F : 1110000000111000101000101010111000010101001000010111010101011111
              rnd = 15902726471793910676 : DCB1D578477A2394 : 1101110010110001110101010111100001000111011110100010001110010100
-RNG ENIGMA - Ringstellung A: D C B 1 D 5 7 8 4 7 7 A 2 3 9 4
-             Ringstellung B: F 5 5 7 1 2 5 1 E A 2 A 8 3 0 E
+RNG ENIGMA - Ringstellung A: D C B 1 D 5 7 8 4 7 7 A 2 3 9 4 
+             Ringstellung B: F 5 5 7 1 2 5 1 E A 2 A 8 3 0 E 
 
 RNG ENIGMA - pre = 05946188227348209870 : 52851AB042B320CE : 0101001010000101000110101011000001000010101100110010000011001110
              aux = 04217993724875858190 : 3A8952F1E40D610E : 0011101010001001010100101111000111100100000011010110000100001110
              rnd = 07497446926472593856 : 680C4841A6BE41C0 : 0110100000001100010010000100000110100110101111100100000111000000
-RNG ENIGMA - Ringstellung A: 6 8 0 C 4 8 4 1 A 6 B E 4 1 C 0
-             Ringstellung B: E 0 1 6 D 0 4 E 1 F 2 5 9 8 A 3
+RNG ENIGMA - Ringstellung A: 6 8 0 C 4 8 4 1 A 6 B E 4 1 C 0 
+             Ringstellung B: E 0 1 6 D 0 4 E 1 F 2 5 9 8 A 3 
 
 RNG ENIGMA - pre = 06683765222441924314 : 5CC1810EC5C2B6DA : 0101110011000001100000010000111011000101110000101011011011011010
              aux = 12544510931843109282 : AE170E3A958351A2 : 1010111000010111000011100011101010010101100000110101000110100010
              rnd = 17498330857042208632 : F2D68F345041E778 : 1111001011010110100011110011010001010000010000011110011101111000
-RNG ENIGMA - Ringstellung A: F 2 D 6 8 F 3 4 5 0 4 1 E 7 7 8
-             Ringstellung B: 2 A 1 5 3 8 5 9 A 3 E 0 7 1 E A
+RNG ENIGMA - Ringstellung A: F 2 D 6 8 F 3 4 5 0 4 1 E 7 7 8 
+             Ringstellung B: 2 A 1 5 3 8 5 9 A 3 E 0 7 1 E A 
 
 RNG ENIGMA - pre = 14047566123115450315 : C2F2FAF6371B8FCB : 1100001011110010111110101111011000110111000110111000111111001011
              aux = 10270188054021804720 : 8E87099F106E12B0 : 1000111010000111000010011001111100010000011011100001001010110000
              rnd = 05509577352116804987 : 4C75F36927759D7B : 0100110001110101111100110110100100100111011101011001110101111011
-RNG ENIGMA - Ringstellung A: 4 C 7 5 F 3 6 9 2 7 7 5 9 D 7 B
-             Ringstellung B: 0 B 2 1 E 6 0 1 F 9 9 0 7 8 E 8
+RNG ENIGMA - Ringstellung A: 4 C 7 5 F 3 6 9 2 7 7 5 9 D 7 B 
+             Ringstellung B: 0 B 2 1 E 6 0 1 F 9 9 0 7 8 E 8 
 
-D996EFAF85039E05    0.849959354735814410
-F900A13F639FA93B    0.972665861106746465
-E4DEA8CD04057D2A    0.894022512486136511
-C0B0131235C9F0B1    0.752686683603122964
-23F2487520D18CBE    0.140415695758582260
-C042F4788EFA6E54    0.751021651681165192
-DCB1D578477A2394    0.862088529458084896
-680C4841A6BE41C0    0.406437412288817690
-F2D68F345041E778    0.948586416503764962
-4C75F36927759D7B    0.298674786732098463
+D996EFAF85039E05	0.849959354735814410
+F900A13F639FA93B	0.972665861106746465
+E4DEA8CD04057D2A	0.894022512486136511
+C0B0131235C9F0B1	0.752686683603122964
+23F2487520D18CBE	0.140415695758582260
+C042F4788EFA6E54	0.751021651681165192
+DCB1D578477A2394	0.862088529458084896
+680C4841A6BE41C0	0.406437412288817690
+F2D68F345041E778	0.948586416503764962
+4C75F36927759D7B	0.298674786732098463
 
 --------------------------------------------------------------------------------
-RNG ENIGMA - avg:     0.6876558904354333
+RNG ENIGMA - avg:	  0.6876558904354333
 --------------------------------------------------------------------------------
-RNG ENIGMA - time:    0.00085481 seconds
+RNG ENIGMA - time:	  0.00027735 seconds
+
 ```
 &nbsp;
 
@@ -806,4 +797,111 @@ Preparing to run test 209.  ntuple = 0
 real    147m45,100s
 user    145m41,537s
 sys 2m1,395s
+```
+
+&nbsp;
+
+## SWIG and Python
+
+Using [SWIG](https://en.wikipedia.org/wiki/SWIG) the library can be used with Python.
+
+> The Simplified Wrapper and Interface Generator (SWIG) is an open-source software tool used to connect computer programs or libraries written in C or C++ with scripting languages.
+
+SWIG and the required Python 3 Dev library can easily be installed via apt:
+```
+$ sudo apt install swig
+$ sudo apt install python3-dev
+```
+The library has a new folder [swig](./library/swig), which contains its own CMake configuration file and a [SWIG interface file](http://www.swig.org/Doc1.3/SWIG.html#SWIG_nn47). For convenience a **build script** is also provided
+
+To help the SWIG compiler the library code is changed a little bit. For example, in function **rng_read_random()**  the two-dimensional array argument is changed from **uint64_t rotors[16][16]** to **uint64_t* p_rotors** to suppress **incompatible pointer type** warnings.
+
+```
+[ 40%] Building C object CMakeFiles/_rng_enigma.dir/lib_rng_enigmaPYTHON_wrap.c.o
+/home/orhanku/ME/DEV/OK/SWIG/rng-enigma/library/swig/build/lib_rng_enigmaPYTHON_wrap.c: In function ‘_wrap_rng_read_random’:
+/home/orhanku/ME/DEV/OK/SWIG/rng-enigma/library/swig/build/lib_rng_enigmaPYTHON_wrap.c:3751:53: warning: passing argument 2 of ‘rng_read_random’ from incompatible pointer type [-Wincompatible-pointer-types]
+   result = (bool)rng_read_random((char const *)arg1,(unsigned long long (*)[16])arg2);
+                                                     ^
+In file included from /home/orhanku/ME/DEV/OK/SWIG/rng-enigma/library/swig/build/lib_rng_enigmaPYTHON_wrap.c:3027:0:
+/home/orhanku/ME/DEV/OK/SWIG/rng-enigma/library/swig/../include/../include/rng_file.h:14:6: note: expected ‘uint64_t (*)[16] {aka long unsigned int (*)[16]}’ but argument is of type ‘long long unsigned int (*)[16]’
+ bool rng_read_random(const char* file_path, uint64_t rotors[16][16]);
+      ^~~~~~~~~~~~~~~
+```
+To build the Python bindings by SWIG the build script can be used:
+```
+$ cdlibrary/swig
+
+$ ./build.sh
+
+$ cd ../lib/
+
+$ ls
+librng-enigma.a  lib_rng_enigma.h  rng_enigma.h  rng_enigma.py  _rng_enigma.so  rng_file.h
+
+$ LD_LIBRARY_PATH=. python3
+Python 3.6.7 (default, Oct 22 2018, 11:32:17) 
+[GCC 8.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import rng_enigma
+
+>>> rng_enigma.rng_get_version()
+'0.3.1'
+>>> rng_enigma.rng_enigma_is_initialized()
+False
+>>> rng_enigma.rng_enigma_init("../../application/bin/enigma-rotors.cfg", None)
+True
+>>> rng_enigma.rng_enigma_is_initialized()
+True
+>>> rotors = rng_enigma.rng_get_rotors()
+>>> print(rotors)
+7 5 0 B 3 A D 6 E 2 F C 8 4 9 1
+9 7 6 5 D 3 4 2 1 E A B F 0 C 8
+B C D 8 6 4 A 7 5 3 E 0 2 F 1 9
+E 6 C D 4 B 3 2 F 5 8 9 7 0 A 1
+5 B 4 6 9 3 F A D 1 2 E 7 C 0 8
+C 0 D 9 4 5 6 7 E 2 8 1 A B F 3
+9 E B 7 C D 6 4 8 2 F 0 A 5 3 1
+3 9 4 6 5 2 7 8 1 E B C D A F 0
+A 4 8 E 3 D 2 F 1 6 7 5 9 C 0 B
+8 7 6 5 4 3 9 A B C 2 1 0 D E F
+4 E D 5 B 6 C 2 3 7 9 8 F 0 1 A
+6 4 5 B D 3 E 7 9 C 8 A 0 F 2 1
+7 3 6 8 F 2 B 5 4 D E 9 1 0 A C
+9 E D A 4 3 B C 6 5 7 8 0 1 F 2
+1 D 8 E 5 C 6 B 7 A 2 F 0 9 3 4
+8 1 0 2 C B 9 4 A 6 7 5 D F E 3
+
+>>> seed = rng_enigma.rng_get_seed()
+>>> print(seed)
+1544996089255362566
+>>> print("%X" % seed)
+1570EDC1E76F0006
+>>> 
+>>> rng_enigma.rng_get_uint64()
+188727632785135423
+>>> rng_enigma.rng_get_dbl(rng_enigma.rng_get_uint64())
+0.5336570239047165
+>>> 
+>>> a = rng_enigma.new_uint32P()
+>>> b = rng_enigma.new_uint32P()
+>>> rng_enigma.rng_get_uint32(a, b)
+>>> a
+<Swig Object of type 'uint_fast16_t *' at 0x7fe8ff9a6840>
+>>> b
+<Swig Object of type 'uint_fast16_t *' at 0x7fe8ff9a6810>
+>>> rng_enigma.uint32P_value(a)
+3127494858
+>>> rng_enigma.uint32P_value(b)
+1879976519
+>>> rng_enigma.rng_get_flt(rng_enigma.uint32P_value(a))
+0.7281765937805176
+>>> rng_enigma.rng_get_flt(rng_enigma.uint32P_value(b))
+0.43771612644195557
+>>> 
+>>> CTRL+D 
+
+$ ../swig
+
+$ ./build.sh expunge
+
 ```
