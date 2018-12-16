@@ -7,9 +7,8 @@
 %}
 
 %include <stdint.i>
-
 %include "../include/rng_enigma.h"
 %include "../include/rng_file.h"
 
-//%include "cpointer.i"
-//%pointer_functions(uint64_t, p)
+%include "cpointer.i"
+%pointer_functions(uint32_t, uint32P)
