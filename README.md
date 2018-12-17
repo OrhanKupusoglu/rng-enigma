@@ -884,12 +884,12 @@ To help the SWIG compiler the library code is changed a little bit. For example,
 
 ```
 [ 40%] Building C object CMakeFiles/_rng_enigma.dir/lib_rng_enigmaPYTHON_wrap.c.o
-/home/orhanku/ME/DEV/OK/SWIG/rng-enigma/library/swig/build/lib_rng_enigmaPYTHON_wrap.c: In function ‘_wrap_rng_read_random’:
-/home/orhanku/ME/DEV/OK/SWIG/rng-enigma/library/swig/build/lib_rng_enigmaPYTHON_wrap.c:3751:53: warning: passing argument 2 of ‘rng_read_random’ from incompatible pointer type [-Wincompatible-pointer-types]
+/home/orhanku/ME/DEV/OK/rng-enigma/library/swig/build/lib_rng_enigmaPYTHON_wrap.c: In function ‘_wrap_rng_read_random’:
+/home/orhanku/ME/DEV/OK/rng-enigma/library/swig/build/lib_rng_enigmaPYTHON_wrap.c:3751:53: warning: passing argument 2 of ‘rng_read_random’ from incompatible pointer type [-Wincompatible-pointer-types]
    result = (bool)rng_read_random((char const *)arg1,(unsigned long long (*)[16])arg2);
                                                      ^
-In file included from /home/orhanku/ME/DEV/OK/SWIG/rng-enigma/library/swig/build/lib_rng_enigmaPYTHON_wrap.c:3027:0:
-/home/orhanku/ME/DEV/OK/SWIG/rng-enigma/library/swig/../include/../include/rng_file.h:14:6: note: expected ‘uint64_t (*)[16] {aka long unsigned int (*)[16]}’ but argument is of type ‘long long unsigned int (*)[16]’
+In file included from /home/orhanku/ME/DEV/OK/rng-enigma/library/swig/build/lib_rng_enigmaPYTHON_wrap.c:3027:0:
+/home/orhanku/ME/DEV/OK/rng-enigma/library/swig/../include/../include/rng_file.h:14:6: note: expected ‘uint64_t (*)[16] {aka long unsigned int (*)[16]}’ but argument is of type ‘long long unsigned int (*)[16]’
  bool rng_read_random(const char* file_path, uint64_t rotors[16][16]);
       ^~~~~~~~~~~~~~~
 ```
