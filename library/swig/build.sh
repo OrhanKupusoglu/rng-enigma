@@ -5,11 +5,9 @@ set -e
 
 # read arguments
 ACTION="$1"
-COMMAND="$2"
 
 # parameter expansion - to clear white space
 ACTION=${ACTION/ //}
-COMMAND=${COMMAND/ //}
 
 # get working dir
 DIR_WORK=$(cd $(dirname "$0") && pwd)
@@ -21,6 +19,7 @@ help () {
     echo "    clean         -- call 'swig clean'"
     echo "    purge         -- call 'swig purge'"
     echo "    expunge       -- call 'clean; purge'"
+    echo "    run           -- run the test script 'rng_test.py'"
     echo "    help          -- print this help"
 }
 
@@ -78,14 +77,19 @@ expunge() {
     purge
 }
 
+run() {
+    cd $DIR_WORK/../lib
+    LD_LIBRARY_PATH=. python3 rng_test.py
+}
+
 # action
 case "$ACTION" in
     "build")        build ; exit 0 ;;
     "clean")        clean ; exit 0 ;;
     "purge")        purge ; exit 0 ;;
     "expunge")      expunge ; exit 0 ;;
+    "run")          run ; exit 0 ;;
     "help")         help ; exit 0 ;;
-    "swig")         action "$ACTION" "$COMMAND" ; exit 0 ;;
     "")             build ; exit 0 ;;
-    *)              echo "ERROR: command '${ACTION}' is not supported" ; help ; exit 4 ;;
+    *)              echo "ERROR: command '${ACTION}' is not supported" ; help ; exit 3 ;;
 esac

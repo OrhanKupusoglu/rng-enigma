@@ -35,5 +35,6 @@ swig_link_libraries(rng_enigma ${PYTHON_LIBRARIES})
 add_custom_command(TARGET ${SWIG_MODULE_rng_enigma_REAL_NAME}
                    POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy _rng_enigma.so "../../lib"
-                   COMMAND ${CMAKE_COMMAND} -E copy rng_enigma.py "../../lib")
+                   COMMAND ${CMAKE_COMMAND} -E copy rng_enigma.py "../../lib"
+                   COMMAND ${CMAKE_COMMAND} -E copy ../rng_test.py "../../lib")
 

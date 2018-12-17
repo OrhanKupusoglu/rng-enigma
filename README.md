@@ -893,7 +893,7 @@ In file included from /home/orhanku/ME/DEV/OK/rng-enigma/library/swig/build/lib_
  bool rng_read_random(const char* file_path, uint64_t rotors[16][16]);
       ^~~~~~~~~~~~~~~
 ```
-To build the Python bindings by SWIG the build script can be used:
+To build and run the Python bindings by SWIG the build script can be used:
 ```
 $ cd library/swig
 
@@ -996,6 +996,58 @@ A 4 8 E 3 D 2 F 1 6 7 5 9 C 0 B
 >>> CTRL+D
 
 $ cd ../swig
+
+$ ./build.sh run
+RNG ENIGMA - version: 0.3.1
+
+RNG ENIGMA - initialized? False
+RNG ENIGMA - read config: '../../application/bin/enigma-rotors.cfg'? True
+RNG ENIGMA - initialized? True
+
+RNG ENIGMA - Rotors:
+7 5 0 B 3 A D 6 E 2 F C 8 4 9 1
+9 7 6 5 D 3 4 2 1 E A B F 0 C 8
+B C D 8 6 4 A 7 5 3 E 0 2 F 1 9
+E 6 C D 4 B 3 2 F 5 8 9 7 0 A 1
+5 B 4 6 9 3 F A D 1 2 E 7 C 0 8
+C 0 D 9 4 5 6 7 E 2 8 1 A B F 3
+9 E B 7 C D 6 4 8 2 F 0 A 5 3 1
+3 9 4 6 5 2 7 8 1 E B C D A F 0
+A 4 8 E 3 D 2 F 1 6 7 5 9 C 0 B
+8 7 6 5 4 3 9 A B C 2 1 0 D E F
+4 E D 5 B 6 C 2 3 7 9 8 F 0 1 A
+6 4 5 B D 3 E 7 9 C 8 A 0 F 2 1
+7 3 6 8 F 2 B 5 4 D E 9 1 0 A C
+9 E D A 4 3 B C 6 5 7 8 0 1 F 2
+1 D 8 E 5 C 6 B 7 A 2 F 0 9 3 4
+8 1 0 2 C B 9 4 A 6 7 5 D F E 3
+
+RNG ENIGMA - seed: 1545081975721872016
+RNG ENIGMA - seed: 15713BDEE7C2CA90
+
+RNG ENIGMA - uint64 & double:
+   6549787651526834517 : 0.355064700055206072804
+   4600725566994150883 : 0.249405832737233046359
+  13212148882089284894 : 0.716232026058156501236
+   1362876565149911462 : 0.073881686638255672506
+   9763502568614957529 : 0.529280534798006963015
+    123478584947829164 : 0.006693787502793480115
+  15685572373005869512 : 0.850316582174578616815
+   8564137597564422964 : 0.464262829437206647754
+   9294918200398166094 : 0.503878525297337231947
+  12221300367964892515 : 0.662518020477271374347
+
+RNG ENIGMA - uint32 & float:
+  2283804610 : 0.53173959255
+  1943266645 : 0.45245194435
+  1610738818 : 0.37502932549
+   543099198 : 0.12645006180
+  3947274908 : 0.91904652119
+  3914415150 : 0.91139578819
+   738684859 : 0.17198836803
+  1617581095 : 0.37662243843
+  2709501737 : 0.63085496426
+  2210271875 : 0.51461899281
 
 $ ./build.sh expunge
 ++ Cleaning the build project ...
