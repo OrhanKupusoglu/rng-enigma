@@ -11,7 +11,7 @@ add_definitions(-DRNG_CFG=NULL)
 add_definitions(-DRNG_SEED=NULL)
 
 get_directory_property( DirDefs COMPILE_DEFINITIONS )
-message( "-- Compile_definitions: ${DirDefs}" )
+message( "-- Compile definitions: ${DirDefs}" )
 
 set(SOURCE_FILES "src/main.c")
 

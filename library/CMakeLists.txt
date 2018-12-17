@@ -5,7 +5,7 @@ set(BUILD_NAME rng-enigma)
 include("CMakeVersion.txt")
 
 get_directory_property( DirDefs COMPILE_DEFINITIONS )
-message( "-- Compile_definitions: ${DirDefs}" )
+message( "-- Compile definitions: ${DirDefs}" )
 
 set(SOURCE_FILES "src/rng_enigma.c"
                  "src/rng_file.c")

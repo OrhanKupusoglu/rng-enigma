@@ -71,7 +71,7 @@ USAGE: enter a command, no command defaults to 'build'
 
 $ ./build.sh
 ++ CMaking the library project ...
--- Compile_definitions: RNG_ENIGMA_LIB_VERSION="0.3.1"
+-- Compile definitions: RNG_ENIGMA_LIB_VERSION="0.3.1"
 -- The C compiler identification is GNU 7.3.0
 -- Check for working C compiler: /usr/bin/cc
 -- Check for working C compiler: /usr/bin/cc -- works
@@ -97,7 +97,7 @@ Install the project...
 -- Installing: /home/orhanku/ME/DEV/OK/rng-enigma/library/lib/lib_rng_enigma.h
 ++ Maked the library project.
 ++ CMaking the application project ...
--- Compile_definitions: RNG_DEBUG=false;RNG_CFG=NULL;RNG_SEED=NULL
+-- Compile definitions: RNG_DEBUG=false;RNG_CFG=NULL;RNG_SEED=NULL
 -- The C compiler identification is GNU 7.3.0
 -- Check for working C compiler: /usr/bin/cc
 -- Check for working C compiler: /usr/bin/cc -- works
