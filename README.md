@@ -932,7 +932,7 @@ Scanning dependencies of target _rng_enigma
 $ cd ../lib/
 
 $ ls
-librng-enigma.a  lib_rng_enigma.h  rng_enigma.h  rng_enigma.py  _rng_enigma.so  rng_file.h
+rng_enigma.py  _rng_enigma.so  rng_test.py
 
 $ LD_LIBRARY_PATH=. python3
 Python 3.6.7 (default, Oct 22 2018, 11:32:17)
