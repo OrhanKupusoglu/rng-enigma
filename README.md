@@ -880,7 +880,7 @@ Please see http://www.swig.org for reporting bugs and further information
 ```
 The library has a new folder [swig](./library/swig), which contains its own CMake configuration file and a [SWIG interface file](http://www.swig.org/Doc1.3/SWIG.html#SWIG_nn47). For convenience a **build script** is also provided
 
-To help the SWIG compiler the library code is changed a little bit. For example, in function **rng_read_random()**  the two-dimensional array argument is changed from **uint64_t rotors[16][16]** to **uint64_t* p_rotors** to suppress **incompatible pointer type** warnings.
+To help the SWIG compiler the library code is changed a little bit. For example, in function **rng_read_random()**  the two-dimensional array argument is changed from **uint64_t rotors[16][16]** to **uint64_t&ast; p_rotors** to suppress **incompatible pointer type** warnings.
 
 ```
 [ 40%] Building C object CMakeFiles/_rng_enigma.dir/lib_rng_enigmaPYTHON_wrap.c.o
