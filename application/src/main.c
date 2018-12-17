@@ -44,14 +44,13 @@ int main(int argc, char** argv) {
                 // if seed is NULL then current time in nanoseconds will be used
                 //   else the seed (f.e. "15594288E20BFBF1") is presumed to be a base 16 number
 
-                //rng_enigma_init("enigma-rotors.cfg", RNG_SEED);
-                rng_enigma_init(NULL, RNG_SEED);
+                rng_enigma_init(RNG_CFG, RNG_SEED);
 
                 if (rng_is_debug()) {
                     char* p_buff = rng_get_rotors();
 
                     printf("\nRNG ENIGMA - Rotors:\n");
-                    printf("%s\n", p_buff);
+                    printf("%s\n\n", p_buff);
 
                     free(p_buff);
                 }

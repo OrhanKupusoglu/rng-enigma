@@ -19,7 +19,7 @@ Let's start with a [Gedankenexperiment](https://www.britannica.com/science/Gedan
 
 The modified Enigma machines have 16 rotors, instead of three or four, and rotors contain hexadecimal digits instead of the 26 letters of the alphabet. Therefore each keystroke generates a hexadecimal digit. Since decryption is not a requirement, at each keystroke rotors are changed freely.
 
-Rotors are modeled as a two dimensional array, read from a given file, for an example see [enigma-rotors.cfg](./application/bin/enigma-rotors.cfg), or the embedded [default configuration](./library/include/rng_enigma.h) is used. The first dimension corresponds to the order of the rotors, and the second dimension corresponds to the typed input. With this setup of **rotor & input**, coding simplifies considerably. For historical reasons, these indices are called **Ringstellungen**.
+Rotors are modeled as a two dimensional array. The first dimension corresponds to the order of the rotors, and the second dimension corresponds to the typed input. With this setup of **rotor & input**, coding simplifies considerably. For historical reasons, these indices are called **Ringstellungen**.
 
 Assuming that each operator knows his counterpart's state at each step, they can think of an algorithm:
 
@@ -30,9 +30,10 @@ Assuming that each operator knows his counterpart's state at each step, they can
 - In the next run, **A** will generate his **Ringstellungen** using this pseudorandom number in the given order, and **B** will use his auxiliary number in the reverse order.
 - This procedure continues at will.
 
-The **seed** can explicitly be given as an hexadecimal string, like **"15594288E20BFBF1"**, or  by selecting **NULL** the current time in nanoseconds will be used as the seed. The seed can be set by the application's [CMakeListst.txt](.//application/CMakeLists.txt) build file.
+The path to the configuration file can be given, for an example see [enigma-rotors.cfg](./application/bin/enigma-rotors.cfg), or by selecting **NULL** the embedded [default configuration](./library/include/rng_enigma.h) will be used. The **seed** can explicitly be given as an hexadecimal string, like **"15594288E20BFBF1"**, or  by selecting **NULL** the current time in nanoseconds will be used as the seed. The configuration file for rotors and the seed can be set by the application's [CMakeListst.txt](.//application/CMakeLists.txt) build file.
 
 ```
+add_definitions(-DRNG_CFG="enigma-rotors.cfg")
 add_definitions(-DRNG_SEED="15594288E20BFBF1")
 ```
 

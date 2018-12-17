@@ -7,6 +7,7 @@ set(BUILD_MINOR_VER 3)
 set(BUILD_PATCH_VER 1)
 
 add_definitions(-DRNG_DEBUG=false)
+add_definitions(-DRNG_CFG=NULL)
 add_definitions(-DRNG_SEED=NULL)
 
 get_directory_property( DirDefs COMPILE_DEFINITIONS )
