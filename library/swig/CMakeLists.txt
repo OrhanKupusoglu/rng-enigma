@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.8)
 
 # ------------------------------------------------------------------------------
 # SWIG BINDINGS FOR PYTHON
@@ -7,7 +7,7 @@ cmake_minimum_required(VERSION 3.5)
 include("../CMakeVersion.txt")
 
 if(POLICY CMP0078)
-    cmake_policy(SET CMP0078 LEGACY)
+    cmake_policy(SET CMP0078 OLD)
 endif()
 
 find_package(SWIG REQUIRED)
