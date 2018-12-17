@@ -70,6 +70,53 @@ USAGE: enter a command, no command defaults to 'build'
     help          -- print this help
 
 $ ./build.sh
+++ CMaking the library project ...
+-- Compile_definitions: RNG_ENIGMA_LIB_VERSION="0.3.1"
+-- The C compiler identification is GNU 5.4.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/orhanku/ME/DEV/OK/rng-enigma/library/build
+++ CMaked the library project.
+++ Making the library project ...
+Scanning dependencies of target rng-enigma
+[ 33%] Building C object CMakeFiles/rng-enigma.dir/src/rng_enigma.c.o
+[ 66%] Building C object CMakeFiles/rng-enigma.dir/src/rng_file.c.o
+[100%] Linking C static library ../lib/librng-enigma.a
+[100%] Built target rng-enigma
+[100%] Built target rng-enigma
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /home/orhanku/ME/DEV/OK/rng-enigma/library/lib/rng_enigma.h
+-- Installing: /home/orhanku/ME/DEV/OK/rng-enigma/library/lib/rng_file.h
+-- Installing: /home/orhanku/ME/DEV/OK/rng-enigma/library/lib/lib_rng_enigma.h
+++ Maked the library project.
+++ CMaking the application project ...
+-- Compile_definitions: RNG_DEBUG=false;RNG_CFG=NULL;RNG_SEED=NULL
+-- The C compiler identification is GNU 5.4.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Link library      : /home/orhanku/ME/DEV/OK/rng-enigma/library/lib/librng-enigma.a
+-- Include directory : /home/orhanku/ME/DEV/OK/rng-enigma/library/lib
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/orhanku/ME/DEV/OK/rng-enigma/application/build
+++ CMaked the application project.
+++ Making the application project ...
+Scanning dependencies of target rng-enigma-app
+[ 50%] Building C object CMakeFiles/rng-enigma-app.dir/src/main.c.o
+[100%] Linking C executable ../bin/rng-enigma-app
+[100%] Built target rng-enigma-app
+++ Maked the application project.
 
 $ ./build.sh run 1 10
 RNG ENIGMA - seed: 1559A250E9C2D138
@@ -81,6 +128,14 @@ RNG ENIGMA - avg:     0.3595859641903761
 RNG ENIGMA - time:    0.00001174 seconds
 
 $ ./build.sh expunge
+++ Cleaning the library project ...
+++ Cleaned the library project.
+++ Cleaning the application project ...
+++ Cleaned the application project.
+++ Purging the library project ...
+++ Purged the library project.
+++ Purging the application project ...
+++ Purged the application project.
 ```
 
 &nbsp;
@@ -840,9 +895,41 @@ In file included from /home/orhanku/ME/DEV/OK/SWIG/rng-enigma/library/swig/build
 ```
 To build the Python bindings by SWIG the build script can be used:
 ```
-$ cdlibrary/swig
+$ cd library/swig
 
 $ ./build.sh
+++ CMaking the build project ...
+-- The C compiler identification is GNU 5.4.0
+-- The CXX compiler identification is GNU 5.4.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found SWIG: /usr/bin/swig3.0 (found version "3.0.8")
+-- Found PythonLibs: /usr/lib/x86_64-linux-gnu/libpython3.5m.so (found version "3.5.2")
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/orhanku/ME/DEV/OK/rng-enigma/library/swig/build
+++ CMaked the build project.
+++ Making the build project ...
+Scanning dependencies of target rng_enigma_swig_compilation
+[ 20%] Swig compile lib_rng_enigma.i for python
+[ 20%] Built target rng_enigma_swig_compilation
+Scanning dependencies of target _rng_enigma
+[ 40%] Building C object CMakeFiles/_rng_enigma.dir/CMakeFiles/_rng_enigma.dir/lib_rng_enigmaPYTHON_wrap.c.o
+[ 60%] Building C object CMakeFiles/_rng_enigma.dir/home/orhanku/ME/DEV/OK/rng-enigma/library/src/rng_enigma.c.o
+[ 80%] Building C object CMakeFiles/_rng_enigma.dir/home/orhanku/ME/DEV/OK/rng-enigma/library/src/rng_file.c.o
+[100%] Linking C shared library _rng_enigma.so
+[100%] Built target _rng_enigma
+++ Maked the build project.
 
 $ cd ../lib/
 
@@ -913,5 +1000,8 @@ A 4 8 E 3 D 2 F 1 6 7 5 9 C 0 B
 $ cd ../swig
 
 $ ./build.sh expunge
-
+++ Cleaning the build project ...
+++ Cleaned the build project.
+++ Purging the build project ...
+++ Purged the build project.
 ```
