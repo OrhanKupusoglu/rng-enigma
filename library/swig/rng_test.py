@@ -29,7 +29,7 @@ for i in range(0, test_size):
     rng_dbl = rng_enigma.rng_get_dbl(rng_uint64)
     print("{0:>22} : {1:22.21f}".format(rng_uint64, rng_dbl))
 
-test_size = 5
+test_size = test_size // 2
 
 print("\nRNG ENIGMA - uint32 & float:")
 for i in range(0, test_size):
