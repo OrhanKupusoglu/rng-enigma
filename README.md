@@ -41,7 +41,7 @@ Without the [XOR](https://en.wikipedia.org/wiki/Exclusive_or) operation Dieharde
 
 The outputs are sensitive to the initial configuration of  the rotors. Besides each dimension uses a constant index for an ever-changing array of hexadecimal digits, which is determined at design-time. These  indices must be selected after many tests.
 
-To better understand the algorithm, please refer to the source code [rng_enigma.c](./library/src/rng_enigma.c) .
+To better understand the algorithm please refer to the source code [rng_enigma.c](./library/src/rng_enigma.c) .
 
 &nbsp;
 
