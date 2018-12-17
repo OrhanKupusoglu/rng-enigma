@@ -43,7 +43,6 @@ int main(int argc, char** argv) {
                 //   else the file's content will be read in
                 // if seed is NULL then current time in nanoseconds will be used
                 //   else the seed (f.e. "15594288E20BFBF1") is presumed to be a base 16 number
-
                 rng_enigma_init(RNG_CFG, RNG_SEED);
 
                 if (rng_is_debug()) {
