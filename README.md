@@ -72,7 +72,7 @@ USAGE: enter a command, no command defaults to 'build'
 $ ./build.sh
 ++ CMaking the library project ...
 -- Compile_definitions: RNG_ENIGMA_LIB_VERSION="0.3.1"
--- The C compiler identification is GNU 5.4.0
+-- The C compiler identification is GNU 7.3.0
 -- Check for working C compiler: /usr/bin/cc
 -- Check for working C compiler: /usr/bin/cc -- works
 -- Detecting C compiler ABI info
@@ -98,7 +98,7 @@ Install the project...
 ++ Maked the library project.
 ++ CMaking the application project ...
 -- Compile_definitions: RNG_DEBUG=false;RNG_CFG=NULL;RNG_SEED=NULL
--- The C compiler identification is GNU 5.4.0
+-- The C compiler identification is GNU 7.3.0
 -- Check for working C compiler: /usr/bin/cc
 -- Check for working C compiler: /usr/bin/cc -- works
 -- Detecting C compiler ABI info
@@ -899,8 +899,8 @@ $ cd library/swig
 
 $ ./build.sh
 ++ CMaking the build project ...
--- The C compiler identification is GNU 5.4.0
--- The CXX compiler identification is GNU 5.4.0
+-- The C compiler identification is GNU 7.3.0
+-- The CXX compiler identification is GNU 7.3.0
 -- Check for working C compiler: /usr/bin/cc
 -- Check for working C compiler: /usr/bin/cc -- works
 -- Detecting C compiler ABI info
@@ -913,18 +913,16 @@ $ ./build.sh
 -- Detecting CXX compiler ABI info - done
 -- Detecting CXX compile features
 -- Detecting CXX compile features - done
--- Found SWIG: /usr/bin/swig3.0 (found version "3.0.8")
--- Found PythonLibs: /usr/lib/x86_64-linux-gnu/libpython3.5m.so (found version "3.5.2")
+-- Found SWIG: /usr/bin/swig3.0 (found version "3.0.12")
+-- Found PythonLibs: /usr/lib/x86_64-linux-gnu/libpython3.6m.so (found version "3.6.7")
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /home/orhanku/ME/DEV/OK/rng-enigma/library/swig/build
 ++ CMaked the build project.
 ++ Making the build project ...
-Scanning dependencies of target rng_enigma_swig_compilation
-[ 20%] Swig compile lib_rng_enigma.i for python
-[ 20%] Built target rng_enigma_swig_compilation
+[ 20%] Swig source
 Scanning dependencies of target _rng_enigma
-[ 40%] Building C object CMakeFiles/_rng_enigma.dir/CMakeFiles/_rng_enigma.dir/lib_rng_enigmaPYTHON_wrap.c.o
+[ 40%] Building C object CMakeFiles/_rng_enigma.dir/lib_rng_enigmaPYTHON_wrap.c.o
 [ 60%] Building C object CMakeFiles/_rng_enigma.dir/home/orhanku/ME/DEV/OK/rng-enigma/library/src/rng_enigma.c.o
 [ 80%] Building C object CMakeFiles/_rng_enigma.dir/home/orhanku/ME/DEV/OK/rng-enigma/library/src/rng_file.c.o
 [100%] Linking C shared library _rng_enigma.so
