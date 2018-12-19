@@ -861,7 +861,7 @@ sys 2m1,395s
 
 Using [SWIG](https://en.wikipedia.org/wiki/SWIG) the library can be imported to Python.
 
-> The Simplified Wrapper and Interface Generator (SWIG) is an open-source software tool used to connect computer programs or libraries written in C or C++ with scripting languages.
+> The Simplified Wrapper and Interface Generator (SWIG) is an open-source software tool used to connect computer programs or libraries written in C or C++ with scripting languages ...
 
 SWIG and the required Python 3 Dev library can easily be installed via apt:
 ```
