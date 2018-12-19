@@ -48,7 +48,7 @@ int main(int argc, char** argv) {
                 if (rng_is_debug()) {
                     char* p_buff = rng_get_rotors();
 
-                    printf("\nRNG ENIGMA - Rotors:\n");
+                    printf("\nRNG ENIGMA - rotors:\n");
                     printf("%s\n\n", p_buff);
 
                     free(p_buff);

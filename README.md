@@ -161,7 +161,7 @@ RNG ENIGMA - Ringstellung A: 3 8 7 7 7 1 0 D 4 6 2 A 9 5 5 1
              Ringstellung B: 1 5 5 9 A 2 6 4 D 0 1 7 7 7 8 3
 RNG ENIGMA - initialization success
 
-RNG ENIGMA - Rotors:
+RNG ENIGMA - rotors:
 1 9 4 8 C F 2 E 6 D A 3 B 0 5 7
 8 C 0 F B A E 1 2 4 3 D 5 6 7 9
 9 1 F 2 0 E 3 5 7 A 4 6 8 D C B
@@ -1004,7 +1004,7 @@ RNG ENIGMA - initialized? False
 RNG ENIGMA - read config: '../../application/bin/enigma-rotors.cfg'? True
 RNG ENIGMA - initialized? True
 
-RNG ENIGMA - Rotors:
+RNG ENIGMA - rotors:
 7 5 0 B 3 A D 6 E 2 F C 8 4 9 1
 9 7 6 5 D 3 4 2 1 E A B F 0 C 8
 B C D 8 6 4 A 7 5 3 E 0 2 F 1 9

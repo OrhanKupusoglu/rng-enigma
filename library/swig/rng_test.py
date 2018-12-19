@@ -14,7 +14,7 @@ rng_initialized = rng_enigma.rng_enigma_is_initialized()
 print("RNG ENIGMA - initialized? {}".format(rng_initialized))
 
 rotors = rng_enigma.rng_get_rotors()
-print("\nRNG ENIGMA - Rotors:")
+print("\nRNG ENIGMA - rotors:")
 print(rotors)
 
 seed = rng_enigma.rng_get_seed()
