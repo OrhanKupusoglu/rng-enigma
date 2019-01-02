@@ -47,9 +47,11 @@ To better understand the algorithm please refer to the source code [rng_enigma.c
 
 ## Build
 
-This project consists of a library to read proc data and a sample application to use this library. Both are built by [CMake](https://cmake.org/). For convenience a [build script](./build.sh) is provided:
+This project consists of a library to read proc data and a sample application to use this library. Both are built by [CMake](https://cmake.org/). On Ubuntu-like Linux boxes package [build-essential](https://packages.ubuntu.com/bionic/build-essential) might be required. For convenience a [build script](./build.sh) is provided:
 
 ```
+$ sudo apt install build-essential
+
 $ sudo apt install cmake
 
 $ ./build.sh help
